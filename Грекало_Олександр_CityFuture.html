@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Грекало Олександр — CityFuture</title>
+  <style>
+    :root{
+      --bg:#05020a; /* deep space */
+      --card:#0b0b12;
+      --accent1:#00f0ff; /* cyan */
+      --accent2:#ff3ec6; /* magenta */
+      --muted:#9aa0b1;
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg) 0%, #0b0710 60%);color:#e9f0ff}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:transparent;position:sticky;top:0;z-index:40}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;font-weight:700;color:#05020a}
+    nav a{color:var(--muted);text-decoration:none;margin:0 10px;padding:8px 12px;border-radius:10px;transition:all .18s}
+    nav a:hover{color:#05020a;background:linear-gradient(90deg,var(--accent1),var(--accent2));transform:translateY(-3px)}
+
+    main{max-width:1100px;margin:26px auto;padding:18px}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:20px;box-shadow:0 6px 30px rgba(0,0,0,0.6);backdrop-filter: blur(6px)}
+    h1{font-size:clamp(26px,4.5vw,44px);margin:0 0 12px 0;line-height:1.03}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .cta{display:inline-block;padding:12px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(255,255,255,0.02));transition:transform .18s}
+    .cta:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.6);}
+
+    /* sections */
+    section.content{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px}
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* gallery */
+    .gallery{display:flex;gap:12px;margin-top:18px}
+    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
+    .credit{font-size:12px;color:var(--muted);margin-top:6px}
+
+    /* interactive strip */
+    .interactive{margin-top:20px;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(255,255,255,0.015));padding:18px;border-radius:12px}
+    .road{position:relative;height:120px;background:linear-gradient(180deg,#07060a, #0a0710);border-radius:10px;overflow:hidden}
+    .vehicle{position:absolute;left:10px;top:38px;width:100px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#05020a;background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 8px 30px rgba(255,62,198,0.14);transform:translateX(0);transition:transform 1s cubic-bezier(.22,.9,.3,1)}
+    .controls{display:flex;gap:12px;margin-top:12px}
+    .btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:var(--glass);cursor:pointer}
+    .btn:hover{transform:translateY(-3px)}
+
+    footer{margin-top:28px;padding:18px;border-radius:12px;color:var(--muted);font-size:13px}
+
+    /* accessibility and responsiveness */
+    @media (max-width:900px){.hero{grid-template-columns:1fr;}.content{grid-template-columns:1fr;}.gallery{flex-direction:column}.vehicle{left:6px;top:22px}}
+
+    /* small interactive nav indicator */
+    .nav-toggle{display:none}
+    @media (max-width:680px){nav{display:none}.nav-toggle{display:inline-block;padding:8px 10px;border-radius:8px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#05020a}}
+
+    /* focus outlines */
+    a:focus, button:focus{outline:3px solid rgba(0,240,255,0.18);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">Г</div>
+      <div>
+        <div style="font-weight:700">Грекало Олександр</div>
+        <div style="font-size:12px;color:var(--muted)">CityFuture — транспорт · архітектура · екологія</div>
+      </div>
+    </div>
+    <div>
+      <button class="nav-toggle" aria-expanded="false" onclick="toggleNav(this)">Меню</button>
+      <nav aria-label="Головна навігація">
+        <a href="#hero">Головна</a>
+        <a href="#transport">Транспорт</a>
+        <a href="#architecture">Архітектура</a>
+        <a href="#ecology">Екологія</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#interactive">Інтерактив</a>
+        <a href="#ai">Як я використовував ШІ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="hero-card">
+        <h1>Моє бачення міста майбутнього — неон + природа</h1>
+        <p class="lead">Місто, де швидкий трансфер, розумні будівлі та відновлювана екологія співпрацюють: транспорт мінімізує втручання, архітектура дихає, а природа інтегрована у кожен простір.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <button class="cta" onclick="document.getElementById('transport').scrollIntoView({behavior:'smooth'})">Дослідити транспорт</button>
+          <button class="cta" onclick="document.getElementById('ecology').scrollIntoView({behavior:'smooth'})">Екологія в дії</button>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-hidden="false">
+        <h3>Ключові кольори</h3>
+        <p class="muted">Акценти: <strong style="color:var(--accent1)">Cyan</strong> та <strong style="color:var(--accent2)">Magenta</strong></p>
+        <h3 style="margin-top:12px">Швидкий огляд</h3>
+        <ul class="muted">
+          <li>Мобільність як сервіс</li>
+          <li>Адаптивна фасадна біологія</li>
+          <li>Клімат-позитивні візерунки</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- 3 content sections -->
+    <section class="content">
+      <article id="transport" class="card" role="region" aria-labelledby="t1">
+        <h3 id="t1">Транспорт — компактний та інклюзивний</h3>
+        <p class="muted">Мережа автономних мікро-транспортних вузлів поєднана з магістралями для швидких електричних поїздів. Пішохідні коридори та зелена інфраструктура на першому рівні.</p>
+        <p style="margin-top:10px">Інновації: динамічне перерозподілення зарядки, міжмодальні хаби поруч з житлом, «тихі» дрони для доставки. Сфокусовано на доступності та зниженні шуму.</p>
+      </article>
+
+      <article id="architecture" class="card" role="region" aria-labelledby="a1">
+        <h3 id="a1">Архітектура — живі фасади</h3>
+        <p class="muted">Будівлі з адаптивними оболонками, що регулюють температуру й пропускають світло, інтегрують вертикальні сади та локальні сади на даху.</p>
+        <p style="margin-top:10px">Концепт: модульні житлові блоки, які легко перепрофільовуються під потреби суспільства — навчання, робота, рекреація.</p>
+      </article>
+
+      <article id="ecology" class="card" role="region" aria-labelledby="e1">
+        <h3 id="e1">Екологія — відновлювана та інтегрована</h3>
+        <p class="muted">Міський ландшафт як екосистема: водозбірні площі, локальні біореактори для очищення, спільнотні сади і політики нульових відходів.</p>
+        <p style="margin-top:10px">Мета — не тільки нейтралізувати вплив, а зробити місто клімат-позитивним через енергію, біоразноманіття та циркулярні системи.</p>
+      </article>
+    </section>
+
+    <!-- MINI GALLERY -->
+    <section id="gallery" class="card" style="margin-top:18px">
+      <h3>Міні-галерея</h3>
+      <div class="gallery">
+        <figure style="flex:1 1 0">
+          <img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1" alt="Неонове місто з вертикальними садами">
+          <figcaption class="credit">Неонові фасади + вертикальний сад — Фото: Unsplash (credit)</figcaption>
+        </figure>
+        <figure style="flex:1 1 0">
+          <img src="https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2" alt="Електричний транспорт на вулиці майбутнього">
+          <figcaption class="credit">Електромобілі й мікро-хаби — Фото: Unsplash (credit)</figcaption>
+        </figure>
+        <figure style="flex:1 1 0">
+          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3" alt="Міський дах з садом та сонячними панелями">
+          <figcaption class="credit">Сади на дахах та сонячні панелі — Фото: Unsplash (credit)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Interactive -->
+    <section id="interactive" class="interactive" aria-live="polite">
+      <h3>Інтерактив: Тестуйте маршрут</h3>
+      <p class="muted">Оберіть режим — автобус, поїзд, дрон — та натисніть «Рух», щоб побачити візуальний маршрут і приблизний час.</p>
+
+      <div class="controls">
+        <label class="muted">Режим:
+          <select id="mode" aria-label="Оберіть режим пересування">
+            <option value="tram">Трамвай</option>
+            <option value="hyperloop">Швидкий поїзд</option>
+            <option value="drone">Дрон</option>
+          </select>
+        </label>
+        <label class="muted">Відстань (км):
+          <input id="distance" type="number" min="0.5" step="0.1" value="3" style="width:80px">
+        </label>
+        <button class="btn" onclick="startTrip()">Рух</button>
+        <button class="btn" onclick="resetTrip()">Скинути</button>
+      </div>
+
+      <div class="road" id="road" aria-hidden="false" style="margin-top:12px">
+        <div id="vehicle" class="vehicle">TRAM</div>
+      </div>
+      <div id="result" class="muted" style="margin-top:10px">Час поїздки: —</div>
+    </section>
+
+    <!-- AI prompt section -->
+    <section id="ai" class="card" style="margin-top:18px">
+      <h3>Як я використовував ШІ</h3>
+      <p class="muted">Нижче — промпт, який я подав для генерації концепції і структури сторінки:</p>
+      <pre style="white-space:pre-wrap;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;color:var(--muted);font-size:13px">Напиши лаконічну односторінкову презентацію-прототип (HTML файл із вбудованими CSS/JS, без фреймворків) на 1 сторінку: показати бачення транспорту, архітектури та екології майбутнього. Обов’язкові секції: Hero, Навігація (якірна), 3 змістові розділи, Міні-галерея (3 зображення з alt і підписами), Інтерактив (JS без бекенду), Footer, «Як я використовував ШІ» (включити промпт). Візуальний настрій: неон-future. Технічні вимоги: семантика header, nav, main, section, footer; адаптивність; мінімум 2 акцентні кольори; hover-ефекти; 3–4 зображення; назва файлу Формат Прізвище_Імя_CityFuture.html.</pre>
+    </section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>© Грекало Олександр — Концепт CityFuture</div>
+        <div class="muted">Форма: неон-future · Контакти: example@domain.com</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // small nav toggle for mobile
+    function toggleNav(btn){
+      const nav = document.querySelector('nav');
+      const open = nav.style.display !== 'block';
+      nav.style.display = open ? 'block' : 'none';
+      btn.setAttribute('aria-expanded', open);
+    }
+
+    // Interactive vehicle animation and time estimate
+    const vehicle = document.getElementById('vehicle');
+    const road = document.getElementById('road');
+    const result = document.getElementById('result');
+
+    function startTrip(){
+      const mode = document.getElementById('mode').value;
+      const dist = parseFloat(document.getElementById('distance').value) || 1;
+      let speedKmh = 20; // default
+      if(mode === 'tram') speedKmh = 25;
+      if(mode === 'hyperloop') speedKmh = 600;
+      if(mode === 'drone') speedKmh = 80;
+
+      const timeH = dist / speedKmh; // hours
+      const timeMin = Math.round(timeH * 60);
+      result.textContent = `Час поїздки: ~ ${timeMin} хв (${dist} км, режим: ${mode})`;
+
+      // animate vehicle across the road proportionally to distance (clamped)
+      const maxTravel = road.clientWidth - vehicle.clientWidth - 20;
+      const travelPx = Math.min(maxTravel, dist * 60); // 60px per km as heuristic
+      vehicle.textContent = mode.toUpperCase();
+      vehicle.style.transform = `translateX(${travelPx}px)`;
+    }
+
+    function resetTrip(){
+      vehicle.style.transform = 'translateX(0)';
+      result.textContent = 'Час поїздки: —';
+    }
+
+    // small accessibility: allow keyboard activation
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' && document.activeElement.tagName === 'SELECT') startTrip();
+    });
+  </script>
+</body>
+</html>
